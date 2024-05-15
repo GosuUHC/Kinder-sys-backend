@@ -1,0 +1,9 @@
+{
+    "java.project.outputPath": "WEB-INF\\classes",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "c:\\Portable\\glassfish701\\glassfish\\lib\\jakartaee.jar",
+        "c:\\Portable\\glassfish701\\glassfish\\modules\\jakarta.enterprise.cdi-api.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "interactive"
+}

@@ -1,0 +1,511 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: kinder_sys
+  description: Kindergarten REST api
+paths:
+  /diagnostics/{groupId}:
+    get:
+      summary: Получение диагностических данных
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Идентификатор группы
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный запрос
+        '401':
+          description: Требуется аутентификация
+        '404':
+          description: Данные по диагностикам не найдены
+        '500':
+          description: Ошибка
+      security:
+        - bearerAuth: []
+
+  /diagnostics:
+    post:
+      summary: Занесение диагностических данных
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DiagnosticsData'
+      responses:
+        '200':
+          description: Успешное занесение данных
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - bearerAuth: []
+    put:
+      summary: Изменение диагностических данных
+      responses:
+        '200':
+          description: Успешное изменение данных
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - bearerAuth: []
+
+  /recommendations:
+    get:
+      summary: Получить рекомендации
+      responses:
+        '200':
+          description: Успешный запрос
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Недостаточно прав доступа
+        '404':
+          description: Ребенок не найден
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - bearerAuth: []
+    post:
+      summary: Добавление рекомендаций
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RecommendationsData'
+      responses:
+        '200':
+          description: Успешное занесение данных
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - bearerAuth: []
+    put:
+      summary: Изменение рекомендаций
+      responses:
+        '200':
+          description: Успешное изменение данных
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - bearerAuth: []
+
+
+  /recommendations/{recommendationId}:
+    delete:
+      summary: Удаление рекомендаций
+      parameters:
+        - name: recommendationId
+          in: path
+          required: true
+          description: Идентификатор рекомендации
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешное удаление данных
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - bearerAuth: []
+
+  /recommendations/{groupId}:
+    get:
+      summary: Получить рекомендации по всем детям в группе
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Идентификатор группы
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Успешный запрос
+        '401':
+          description: Требуется аутентификация
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - bearerAuth: []
+
+  /children:
+    post:
+      summary: Добавление нового ребенка
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildData'
+      responses:
+        '200':
+          description: Ребенок успешно добавлен
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+    put:
+      summary: Редактирование данных ребенка
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChildData'
+      responses:
+        '200':
+          description: Данные ребенка успешно отредактированы
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '404':
+          description: Ребенок не найден
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+  /children/{childId}:
+    delete:
+      summary: Удаление ребенка
+      parameters:
+        - name: childId
+          in: path
+          required: true
+          description: Идентификатор ребенка
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Ребенок успешно удален
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '404':
+          description: Ребенок не найден
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+  /groups:
+    get:
+      summary: Получение списка с группами детей
+      responses:
+        '200':
+          description: Успешный запрос
+        '401':
+          description: Требуется аутентификация
+        '404':
+          description: Группы не найдены
+        '500':
+          description: Внутренняя ошибка сервера
+
+    post:
+      summary: Создание новой группы
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupData'
+      responses:
+        '200':
+          description: Группа успешно создана
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+    put:
+      summary: Редактирование группы
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GroupData'
+      responses:
+        '200':
+          description: Группа успешно отредактирована
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '404':
+          description: Группа не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+  /groups/{groupId}:
+    delete:
+      summary: Удаление группы
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Идентификатор группы
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Группа успешно удалена
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '404':
+          description: Группа не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+  /categories:
+    post:
+      summary: Создание нового списка категорий и подкатегорий
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryData'
+      responses:
+        '200':
+          description: Список успешно создан
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+    put:
+      summary: Редактирование списка категорий и подкатегорий
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryData'
+      responses:
+        '200':
+          description: Список успешно отредактирован
+        '400':
+          description: Некорректные данные
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '404':
+          description: Список не найден
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+  /categories/{categoryId}:
+    delete:
+      summary: Удаление категории
+      parameters:
+        - name: categoryId
+          in: path
+          required: true
+          description: Идентификатор категории
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Категория успешно удалена
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Доступ запрещен
+        '404':
+          description: Группа не найдена
+        '500':
+          description: Внутренняя ошибка сервера
+      security:
+        - adminAuth: []
+
+  /auth/login:
+    post:
+      summary: Вход пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Успешный вход
+        '401':
+          description: Неверные учетные данные
+
+  /auth/reg:
+    post:
+      summary: Регистрация нового пользователя
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistrationRequest'
+      responses:
+        '200':
+          description: Успешная регистрация
+        '401':
+          description: Требуется аутентификация
+        '403':
+          description: Только администратор может регистрировать новых пользователей
+      security:
+        - adminAuth: []
+
+components:
+  schemas:
+    DiagnosticsData:
+      type: object
+      properties:
+        categories:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Category'
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChildResult'
+
+    Category:
+      type: object
+      properties:
+        подкатегории:
+          type: array
+          items:
+            type: string
+
+    ChildResult:
+      type: object
+      properties:
+        child:
+          type: string
+        results:
+          type: array
+          items:
+            type: integer
+
+    ChildData:
+      type: object
+      properties:
+        childId:
+          type: integer
+        name:
+          type: string
+        age:
+          type: integer
+
+    RecommendationsData:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+        high:
+          type: string
+        medium:
+          type: string
+        low:
+          type: string
+
+    GroupData:
+      type: object
+      properties:
+        groupId:
+          type: integer
+        groupName:
+          type: string
+        childrenIds:
+          type: array
+          items:
+            type: integer
+
+    CategoryData:
+      type: object
+      properties:
+        categoryId:
+          type: integer
+        categoryName:
+          type: string
+        subcategories:
+          type: array
+          items:
+            type: string
+
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+
+    RegistrationRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+    adminAuth:
+      type: http
+      scheme: bearer
+
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/DYSTOPIANGOD/Kinder_sys/1.0.0
