@@ -13,6 +13,8 @@ public interface IUserService {
 
     UserDTO findUserById(Long id);
 
+    UserDTO checkUser(String login, String password);
+
     List<UserDTO> findAllUsers();
 
     public void injectUserRepository(IUserRepository userRepository);

@@ -1,8 +1,5 @@
 package backend.infrastructure.in.rest.path;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import backend.infrastructure.builder.Built;
 import backend.infrastructure.in.rest.interceptor.TokenRequired;
 import backend.infrastructure.in.rest.request.DiagnosticsRequest;
@@ -59,6 +56,29 @@ public class Diagnostics {
 
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @TokenRequired
+    @Path("/groups/{groupId}/categories/{categoryId}/years/{year}")
+    // Получение диагностических данных по id группы
+    public Response getDiagonsticsByGroupIdAndCategoryIdAndYear(@PathParam("groupId") Long groupId,
+            @PathParam("categoryId") Long categoryId, @PathParam("year") Long year) {
+        String error = requestContext.getProperty("checkToken").toString();
+        if (error.equals("false")) {
+            return Response.status(Response.Status.UNAUTHORIZED).build();
+        }
+
+        try {
+            return Response.ok(diagnosticResultService.findDiagnosticResultByChildGroupIdAndCategoryIdAndYear(groupId,
+                    categoryId, year)).build();
+        } catch (JsonbException | IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity(e).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+        }
+
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @TokenRequired
@@ -70,13 +90,9 @@ public class Diagnostics {
         }
 
         try {
-            List<DiagnosticsRequest> diagnosticsRequests = jsonb.fromJson(requestBody,
-                    new ArrayList<DiagnosticsRequest>() {
-                    }.getClass().getGenericSuperclass());
+            DiagnosticsRequest diagnosticsRequest = jsonb.fromJson(requestBody, DiagnosticsRequest.class);
 
-            for (DiagnosticsRequest diagnosticsRequest : diagnosticsRequests) {
-                diagnosticResultService.saveDiagnosticResult(diagnosticRequestMapper.toDTO(diagnosticsRequest));
-            }
+            diagnosticResultService.saveDiagnosticResult(diagnosticRequestMapper.toDTO(diagnosticsRequest));
 
             return Response.ok().build();
         } catch (JsonbException | IllegalArgumentException e) {

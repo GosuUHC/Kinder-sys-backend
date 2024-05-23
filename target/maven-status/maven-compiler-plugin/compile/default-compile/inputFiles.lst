@@ -17,6 +17,7 @@ C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\service\group\dto\Gro
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\service\category\impl\CategoryService.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\out\repository\db\category\CategoryRepository.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\out\repository\db\diagnosticResult\DiagnosticResultRepository.java
+C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\out\response\AuthUserResponse.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\util\entityMapper\UserMapper.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\service\child\interfaces\in\IChildService.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\util\requestMapper\CategoryRequestMapper.java
@@ -41,6 +42,7 @@ C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\in\res
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\out\repository\db\category\ECategory.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\util\entityMapper\CategoryMapper.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\service\category\dto\CategoryDTO.java
+C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\in\rest\request\AuthUserRequest.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\service\user\interfaces\in\IUserService.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\out\repository\db\recommendation\RecommendationRepository.java
 C:\Users\ISeven\Desktop\proj\mm\proj\src\main\java\backend\infrastructure\in\rest\token\TokenManager.java

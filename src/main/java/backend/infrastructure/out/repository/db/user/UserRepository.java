@@ -43,4 +43,19 @@ public class UserRepository implements IUserRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public UserDTO findByLoginAndPassword(String login, String password) {
+        List<EUser> user = entityManager
+                .createQuery("SELECT u FROM EUser u WHERE u.login=:login AND u.password=:password", EUser.class)
+                .setParameter("login", login)
+                .setParameter("password", password)
+                .getResultList();
+
+        if (user.isEmpty()) {
+            return null;
+        }
+
+        return UserMapper.toDTO(user.get(0));
+    }
+
 }

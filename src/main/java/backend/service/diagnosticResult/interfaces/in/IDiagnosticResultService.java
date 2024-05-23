@@ -17,6 +17,8 @@ public interface IDiagnosticResultService {
 
     List<DiagnosticResultDTO> findDiagnosticResultByChildGroupId(Long childGroupId);
 
+    List<DiagnosticResultDTO> findDiagnosticResultByChildGroupIdAndCategoryIdAndYear(Long childGroupId, Long categoryId, Long year);
+
     List<DiagnosticResultDTO> findDiagnosticResultsByChildGroupIdAndYear(Long childGroupId, Integer year);
 
     public void injectDiagnosticRepository(IDiagnosticResultRepository diagnosticResultRepository);

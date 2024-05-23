@@ -44,4 +44,12 @@ public class DiagnosticResultService implements IDiagnosticResultService {
     public List<DiagnosticResultDTO> findDiagnosticResultsByChildGroupIdAndYear(Long childGroupId, Integer year) {
         return diagnosticResultRepository.findByGroupIdAndYear(childGroupId, year);
     }
+
+    @Override
+    public List<DiagnosticResultDTO> findDiagnosticResultByChildGroupIdAndCategoryIdAndYear(Long childGroupId,
+            Long categoryId, Long year) {
+        return diagnosticResultRepository.findDiagnosticResultByChildGroupIdAndCategoryIdAndYear(childGroupId,
+                categoryId, year);
+
+    }
 }

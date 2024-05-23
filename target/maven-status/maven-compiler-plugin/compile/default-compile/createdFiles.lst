@@ -3,8 +3,10 @@ backend\service\child\interfaces\in\IChildService.class
 backend\infrastructure\in\rest\path\Auth.class
 backend\infrastructure\builder\UserBuilder.class
 backend\infrastructure\in\rest\token\TokenValidatorFactory.class
+backend\infrastructure\out\response\AuthUserResponse.class
 backend\infrastructure\out\repository\db\recommendation\ERecommendation.class
 backend\infrastructure\in\rest\token\TokenKey.class
+backend\infrastructure\in\rest\request\AuthUserRequest.class
 backend\infrastructure\util\entityMapper\RecommendationMapper.class
 backend\service\diagnosticResult\impl\DiagnosticResultService.class
 backend\service\group\impl\GroupService.class
@@ -65,7 +67,6 @@ backend\infrastructure\out\repository\db\diagnosticResult\DiagnosticResultReposi
 backend\infrastructure\util\requestMapper\CategoryRequestMapper.class
 backend\service\child\dto\ChildDTO.class
 backend\infrastructure\util\entityMapper\CategoryMapper.class
-backend\infrastructure\in\rest\path\Diagnostics$1.class
 backend\infrastructure\in\rest\config\Config.class
 backend\infrastructure\in\rest\config\Filter.class
 backend\infrastructure\out\repository\db\category\ECategory.class

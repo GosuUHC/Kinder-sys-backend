@@ -12,5 +12,7 @@ public interface IUserRepository {
 
     UserDTO findById(Long id);
 
+    UserDTO findByLoginAndPassword(String login, String password);
+
     List<UserDTO> findAll();
 }

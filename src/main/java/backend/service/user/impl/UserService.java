@@ -34,4 +34,9 @@ public class UserService implements IUserService {
     public void injectUserRepository(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    @Override
+    public UserDTO checkUser(String login, String password) {
+        return userRepository.findByLoginAndPassword(login, password);
+    }
 }

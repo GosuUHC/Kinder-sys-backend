@@ -17,4 +17,6 @@ public interface IDiagnosticResultRepository {
     List<DiagnosticResultDTO> findByGroupId(Long childGroupId);
 
     List<DiagnosticResultDTO> findByGroupIdAndYear(Long childGroupId, Integer year);
+
+    List<DiagnosticResultDTO> findDiagnosticResultByChildGroupIdAndCategoryIdAndYear(Long childGroupId, Long categoryId, Long year);
 }

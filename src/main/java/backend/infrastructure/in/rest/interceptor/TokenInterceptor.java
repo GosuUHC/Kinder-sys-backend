@@ -19,7 +19,7 @@ public class TokenInterceptor implements ContainerRequestFilter {
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String token = requestContext.getHeaderString("Token");
         String userRole = requestContext.getHeaderString("Role");
-        // requestContext.setProperty("checkToken", tokenManager.checkToken(token, userRole));
-        requestContext.setProperty("checkToken", "true");
+        requestContext.setProperty("checkToken", tokenManager.checkToken(token, userRole));
+        // requestContext.setProperty("checkToken", "true");
     }
 }

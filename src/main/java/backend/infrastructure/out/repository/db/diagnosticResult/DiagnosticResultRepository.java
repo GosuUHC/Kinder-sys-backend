@@ -68,4 +68,20 @@ public class DiagnosticResultRepository implements IDiagnosticResultRepository {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<DiagnosticResultDTO> findDiagnosticResultByChildGroupIdAndCategoryIdAndYear(Long childGroupId,
+            Long categoryId, Long year) {
+        List<EDiagnosticResult> entities = entityManager
+                .createQuery(
+                        "SELECT d FROM EDiagnosticResult d WHERE d.childGroupId=:childGroupId AND d.category.id=:categoryId AND d.year=:year",
+                        EDiagnosticResult.class)
+                .setParameter("childGroupId", childGroupId)
+                .setParameter("categoryId", categoryId)
+                .setParameter("year", year)
+                .getResultList();
+        return entities.stream()
+                .map(DiagnosticResultMapper::toDTO)
+                .collect(Collectors.toList());
+    }
+
 }
