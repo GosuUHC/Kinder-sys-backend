@@ -19,8 +19,8 @@ public class StatisticsService implements IStatisticsService {
     }
 
     @Override
-    public StatisticDTO generateStatistics(Long groupId, Integer year) {
-        List<DiagnosticResultDTO> diagnosticResults = diagnosticResultRepository.findByGroupIdAndYear(groupId, year);
+    public StatisticDTO generateStatistics(Long groupId, Long categoryId, Long year) {
+        List<DiagnosticResultDTO> diagnosticResults = diagnosticResultRepository.findDiagnosticResultByChildGroupIdAndCategoryIdAndYear(groupId, categoryId, year);
 
         // Подсчет среднего значения startScore и endScore
         double averageStartScore = diagnosticResults.stream()

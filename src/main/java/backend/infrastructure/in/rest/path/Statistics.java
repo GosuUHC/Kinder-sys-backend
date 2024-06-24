@@ -27,16 +27,16 @@ public class Statistics {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @TokenRequired
-    @Path("/groups/{groupId}/years/{year}")
+    @Path("/groups/{groupId}/categories/{categoryId}/years/{year}")
     // Получение статистических данных по результатам диагностик группы за год
-    public Response getDiagonsticsByGroupId(@PathParam("groupId") Long groupId, @PathParam("year") Integer year) {
+    public Response getStatisticsByGroupId(@PathParam("groupId") Long groupId, @PathParam("categoryId") Long categoryId, @PathParam("year") Long year) {
         String error = requestContext.getProperty("checkToken").toString();
         if (error.equals("false")) {
             return Response.status(Response.Status.UNAUTHORIZED).build();
         }
 
         try {
-            return Response.ok(statisticsService.generateStatistics(groupId, year)).build();
+            return Response.ok(statisticsService.generateStatistics(groupId, categoryId, year)).build();
         } catch (JsonbException | IllegalArgumentException e) {
             return Response.status(Response.Status.BAD_REQUEST).entity(e).build();
         } catch (Exception e) {

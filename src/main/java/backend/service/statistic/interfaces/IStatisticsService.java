@@ -5,7 +5,7 @@ import backend.service.statistic.dto.StatisticDTO;
 
 public interface IStatisticsService {
 
-    StatisticDTO generateStatistics(Long groupId, Integer year);
+    StatisticDTO generateStatistics(Long groupId, Long categoryId, Long year);
 
     public void injectDiagnosticResultRepository(IDiagnosticResultRepository diagnosticResultRepository);
 }
